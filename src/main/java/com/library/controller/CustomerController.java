@@ -1,5 +1,7 @@
 package com.library.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.library.model.Customer;
@@ -46,5 +48,25 @@ public class CustomerController {
     @DeleteMapping("/{id}")
     public void deleteCustomer(@PathVariable Long id) {
         customers.removeIf(customer -> customer.getId().equals(id));
+    }
+
+    
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<Customer> updateCustomerStatus(@PathVariable Long id, @RequestBody String status) {
+        Optional<Customer> existingCustomer = customers.stream()
+                .filter(customer -> customer.getId().equals(id))
+                .findFirst();
+
+        if (existingCustomer.isPresent()) {
+            Customer customer = existingCustomer.get();
+            // Verificação para permitir apenas "ACTIVE" ou "INACTIVE"
+            if ("ACTIVE".equalsIgnoreCase(status) || "INACTIVE".equalsIgnoreCase(status)) {
+                customer.setStatus(status.toUpperCase());
+                return ResponseEntity.ok(customer);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            }
+        }
+        return ResponseEntity.notFound().build();
     }
 }

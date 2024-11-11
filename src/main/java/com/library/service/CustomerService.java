@@ -28,15 +28,14 @@ public class CustomerService {
     }
 
     public Customer updateCustomer(Long id, Customer updatedCustomer) {
-        Customer customer = getCustomerById(id); // Lança exceção se o cliente não existir
+        Customer customer = getCustomerById(id); 
         customer.setName(updatedCustomer.getName());
         customer.setLastname(updatedCustomer.getLastname());
-        // Atualizar outros atributos conforme necessário
         return customerRepository.save(customer);
     }
 
     public void deleteCustomer(Long id) {
-        Customer customer = getCustomerById(id); // Lança exceção se o cliente não existir
+        Customer customer = getCustomerById(id); 
         customerRepository.delete(customer);
     }
 

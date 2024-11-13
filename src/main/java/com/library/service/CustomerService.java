@@ -3,9 +3,10 @@ package com.library.service;
 import com.library.model.Customer;
 import com.library.repository.CustomerRepository;
 import com.library.exception.CustomerNotFoundException;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
-
+@Service
 public class CustomerService {
 
     private final CustomerRepository customerRepository;

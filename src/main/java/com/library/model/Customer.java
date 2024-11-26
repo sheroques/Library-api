@@ -1,30 +1,25 @@
 package com.library.model;
 
+import jakarta.persistence.*;
+import java.time.LocalDate;
+
+@Entity
 public class Customer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String lastname;
     private String address;
     private String city;
     private String state;
     private String country;
-    private String birthDate;
-    private String status; 
+    private LocalDate birthDate;
+    private String status;
 
-    
-    public Customer(Long id, String name, String lastname, String address, String city, String state, String country, String birthDate, String status) {
-        this.id = id;
-        this.name = name;
-        this.lastname = lastname;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.country = country;
-        this.birthDate = birthDate;
-        this.status = status;
-    }
-
-    
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -81,11 +76,11 @@ public class Customer {
         this.country = country;
     }
 
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
